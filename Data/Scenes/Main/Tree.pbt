@@ -667,6 +667,7 @@ Objects {
       }
     }
     Text {
+      Label: "The Mighty Kraken"
       Color {
         A: 1
       }

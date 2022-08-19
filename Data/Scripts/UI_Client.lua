@@ -10,15 +10,15 @@ local FEED_BOX = script:GetCustomProperty("FeedBox"):WaitForObject()
 UI.SetCanCursorInteractWithUI(true)
 UI.SetCursorVisible(true)
 
--- local size = FEED_TEXT:ComputeApproximateSize()
+local size = FEED_BOX:ComputeApproximateSize()
 
--- while(size == nil) do
--- 	size = FEED_TEXT:ComputeApproximateSize()
--- 	Task.Wait()
--- end
+while(size == nil) do
+	size = FEED_BOX:ComputeApproximateSize()
+	Task.Wait()
+end
 
--- Task.Wait()
--- FEED_TEXT.shouldWrapText = true
+Task.Wait(.2)
+FEED_BOX.shouldWrapText = true
 
 ACTION_BOX.textCommittedEvent:Connect(Text_Adventure.parse)
 
