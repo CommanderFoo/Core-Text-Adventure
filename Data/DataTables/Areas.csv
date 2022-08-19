@@ -1,0 +1,5 @@
+"Name[String]","Text[String]","FirstText[String]","Items[Asset Reference]","North[Bool]","East[Bool]","South[Bool]","West[Bool]"
+"South","You are in the south area.","You have washed ashore on a deserted island. After the ship was sunk by the mighty Kraken, you managed to escape by the grace of Captain Black Beard. Looking around you see parts of the ship washed ashore along side you. You seem to be the only survivor. Maybe you should ""look"" around and see what resources there are to be found.","0BADBADBADBADBAD","False","True","False","True"
+"East","You are in East area.","lah blah fdjkfdsklf;sdfsd","0BADBADBADBADBAD","True","False","True","False"
+"West","You are in West area.","lalalalalallalalal","0BADBADBADBADBAD","True","False","True","False"
+"North","You are in North area.","yarrrrrrrrrrrrrrrrrr","0BADBADBADBADBAD","False","True","False","True"
