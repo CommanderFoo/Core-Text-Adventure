@@ -1,0 +1,5 @@
+"Name[String]","Description[String]","SubAction[String]"
+"Apple","A rotten apple that will probably make you ill.",""
+"Rope","A decent length of rope that is in good quality.",""
+"Bottle","An empty bottle of rum with the cork.",""
+"Hole","A hole. Doesn't look that deep.","kill_player"

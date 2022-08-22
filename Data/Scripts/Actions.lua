@@ -68,4 +68,67 @@ function Actions.go(player, params, feed_text)
 	Actions.Text_Adventure.show_warning(string.format("\"%s\" is not valid. Options are: %s.", params[2], Actions.get_valid_directions(area)))
 end
 
+function Actions.look(player, params, feed_text)
+	local area = Actions.Text_Adventure.get_current_area()
+	local items = area.Items
+	local items_txt = "There are no items to look for."
+
+	if(items ~= nil and #items > 0) then
+		items_txt = "The following items can be seen: "
+
+		for index, item in ipairs(items) do
+			items_txt = items_txt .. item.Name .. ", "
+		end
+
+		items_txt = string.sub(items_txt, 1, -3)
+	end
+
+	Actions.Text_Adventure.show_area_text(items_txt, "Look")
+end
+
+local sub_actions = {}
+
+function sub_actions.kill_player()
+	print("You ded")
+end
+
+function Actions.inspect(player, params, feed_text)
+	local area = Actions.Text_Adventure.get_current_area()
+	local items = area.Items
+	local the_item = string.lower(params[2] or "")
+
+	if(the_item ~= "" and items ~= nil and #items > 0) then
+		local name = nil
+		local desc = nil
+		local sub_action = ""
+
+		for index, item in ipairs(items) do
+			if(the_item == string.lower(item.Name)) then
+				name = item.Name
+				desc = item.Description
+				sub_action = item.SubAction
+
+				break
+			end
+		end
+
+		if(name and desc) then
+			Actions.Text_Adventure.show_area_text(desc, "Inspect " .. name)
+		end
+
+		if(string.len(sub_action) > 0) then
+			sub_actions[sub_action]()
+			return
+		end
+
+		return
+	elseif(the_item == "") then
+		Actions.Text_Adventure.show_warning("Can't inspect nothing.")
+
+		return
+	end
+
+	Actions.Text_Adventure.show_warning(string.format("\"%s\" is not valid.", params[2]))
+end
+
 return Actions
