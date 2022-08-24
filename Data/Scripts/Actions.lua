@@ -1,10 +1,12 @@
+---@type Text_Adventure
+local Text_Adventure = nil
+
 ---@class Actions
-local Actions = {
+local Actions = {}
 
-	---@type Text_Adventure
-	Text_Adventure = nil
-
-}
+function Actions.set_text_adventure(ta)
+	Text_Adventure = ta
+end
 
 function Actions.find(text, list)
 	if(string.len(text) > 0) then
@@ -19,7 +21,7 @@ function Actions.find(text, list)
 end
 
 function Actions.get_row_by_name(name)
-	for index, row in ipairs(Actions.Text_Adventure.AREAS) do
+	for index, row in ipairs(Text_Adventure.AREAS) do
 		if(row.Name == name) then
 			return index, row
 		end
@@ -51,7 +53,7 @@ function Actions.get_valid_directions(area)
 end
 
 function Actions.go(player, params, feed_text)
-	local area = Actions.Text_Adventure.get_current_area()
+	local area = Text_Adventure.get_current_area()
 
 	if(Actions.find(params[2], { "north", "east", "south", "west" })) then
 		local dir = string.sub(params[2], 1, 1):upper() .. string.sub(params[2], 2):lower()
@@ -59,17 +61,17 @@ function Actions.go(player, params, feed_text)
 		if(area[dir]) then
 			local area_index, area_row = Actions.get_row_by_name(dir)
 			
-			Actions.Text_Adventure.travel_to(area_index, area_row, params[1] .. " " .. params[2])
+			Text_Adventure.travel_to(area_index, area_row, params[1] .. " " .. params[2])
 
 			return
 		end
 	end
 
-	Actions.Text_Adventure.show_warning(string.format("\"%s\" is not valid. Options are: %s.", params[2], Actions.get_valid_directions(area)))
+	Text_Adventure.show_warning(string.format("\"%s\" is not valid. Options are: %s.", params[2], Actions.get_valid_directions(area)))
 end
 
 function Actions.look(player, params, feed_text)
-	local area = Actions.Text_Adventure.get_current_area()
+	local area = Text_Adventure.get_current_area()
 	local items = area.Items
 	local items_txt = "There are no items to look for."
 
@@ -83,17 +85,11 @@ function Actions.look(player, params, feed_text)
 		items_txt = string.sub(items_txt, 1, -3)
 	end
 
-	Actions.Text_Adventure.show_area_text(items_txt, "Look")
-end
-
-local sub_actions = {}
-
-function sub_actions.kill_player()
-	print("You ded")
+	Text_Adventure.show_area_text(items_txt, "Look")
 end
 
 function Actions.inspect(player, params, feed_text)
-	local area = Actions.Text_Adventure.get_current_area()
+	local area = Text_Adventure.get_current_area()
 	local items = area.Items
 	local the_item = string.lower(params[2] or "")
 
@@ -113,22 +109,22 @@ function Actions.inspect(player, params, feed_text)
 		end
 
 		if(name and desc) then
-			Actions.Text_Adventure.show_area_text(desc, "Inspect " .. name)
+			Text_Adventure.show_area_text(desc, "Inspect " .. name)
 		end
 
 		if(string.len(sub_action) > 0) then
-			sub_actions[sub_action]()
+			Text_Adventure.get_sub_action(sub_action)(player)
 			return
 		end
 
 		return
 	elseif(the_item == "") then
-		Actions.Text_Adventure.show_warning("Can't inspect nothing.")
+		Text_Adventure.show_warning("Can't inspect nothing.")
 
 		return
 	end
 
-	Actions.Text_Adventure.show_warning(string.format("\"%s\" is not valid.", params[2]))
+	Text_Adventure.show_warning(string.format("\"%s\" is not valid.", params[2]))
 end
 
 return Actions

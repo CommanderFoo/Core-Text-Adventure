@@ -1,4 +1,5 @@
 local ACTIONS = require(script:GetCustomProperty("Actions"))
+local SUB_ACTIONS = require(script:GetCustomProperty("Sub_Actions"))
 
 ---@class Text_Adventure
 local Text_Adventure = {
@@ -64,6 +65,11 @@ function Text_Adventure.start()
 	Text_Adventure.show_area_text("", nil, Text_Adventure.AREAS[1].FirstText)
 end
 
-ACTIONS.Text_Adventure = Text_Adventure
+function Text_Adventure.get_sub_action(sub_action)
+	return SUB_ACTIONS[sub_action]
+end
+
+ACTIONS.set_text_adventure(Text_Adventure)
+SUB_ACTIONS.set_text_adventure(Text_Adventure)
 
 return Text_Adventure

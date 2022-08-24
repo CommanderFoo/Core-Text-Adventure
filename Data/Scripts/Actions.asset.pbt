@@ -4,6 +4,12 @@ Assets {
   PlatformAssetType: 3
   TextAsset {
     CustomParameters {
+      Overrides {
+        Name: "cs:Text_Adventure"
+        AssetReference {
+          Id: 12771516697404300359
+        }
+      }
     }
   }
   SerializationVersion: 118
