@@ -78,7 +78,7 @@ Objects {
 }
 Objects {
   Id: 3098740359497989262
-  Name: "UI_Client"
+  Name: "Text_Adventure_Client"
   Transform {
     Location {
     }

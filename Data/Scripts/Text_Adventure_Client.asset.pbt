@@ -1,6 +1,6 @@
 Assets {
   Id: 3688556948234910460
-  Name: "UI_Client"
+  Name: "Text_Adventure_Client"
   PlatformAssetType: 3
   TextAsset {
     CustomParameters {
