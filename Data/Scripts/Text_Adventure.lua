@@ -20,9 +20,13 @@ function Text_Adventure.parse(player, text)
 
 	if(params[1] ~= nil and string.len(params[1]) > 0 and ACTIONS[string.lower(params[1])] ~= nil) then
 		ACTIONS[string.lower(params[1])](player, params)
+	else
+		Text_Adventure.show_warning("Invalid command.")
 	end
 
 	Text_Adventure.action_box.text = ""
+	Task.Wait()
+	Text_Adventure.action_box:Focus()
 end
 
 function Text_Adventure.travel_to(area_index, area_row, action)

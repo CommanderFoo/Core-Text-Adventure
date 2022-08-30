@@ -9,7 +9,7 @@ function Actions.set_text_adventure(ta)
 end
 
 function Actions.find(text, list)
-	if(string.len(text) > 0) then
+	if(text ~= nil and string.len(text) > 0) then
 		for index, word in ipairs(list) do
 			if(string.lower(text) == word) then
 				return true
